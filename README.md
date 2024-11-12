@@ -1,8 +1,22 @@
-# React + Vite
+Pages:
+  Login
+  Feed
+  Profile
+  Blog
+  Search
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Components:
+  Blog
+  Filter
+  Nav
+  Footer
+  UserAgreement
 
-Currently, two official plugins are available:
+Misc:
+  Toast notifications
+  React router or redux
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+
+Model:
+1. User: UserId, Firstname, Lastname, Username, Email, Password, Birthday, CreatedAt(Joined date), 
+2. Blog/post: BlogId, UserId, Title, City, Description, Rating, BackgroundImg, Gallery, Atrticle, CreatedAt.
