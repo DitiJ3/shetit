@@ -10,7 +10,7 @@ const AuthForm = () => {
   const [userName, setUserName] = useState("");
   const [rePassword, setRePassword] = useState("");
 
-  const navigate = useNavigate(); // Initialize the navigate function
+  const navigate = useNavigate();
 
   const handleSignUp = () => {
     if (!userName || !email || !password || !rePassword) {
@@ -27,7 +27,7 @@ const AuthForm = () => {
   };
 
   const handleSignIn = () => {
-    if (!email || !password) {
+    if (!userName || !password) {
       toast.error("You must fill all fields for login!", { position: "bottom-right" });
       return;
     } else {
@@ -112,11 +112,11 @@ const AuthForm = () => {
             <h1 className="font-bold text-2xl mb-4">Sign in</h1>
 
             <input
-              type="email"
-              placeholder="Email"
+              type="text"
+              placeholder="Username"
               className="w-full bg-gray-200 rounded-md px-3 py-2 mb-3 outline-none"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
+              value={userName}
+              onChange={(e) => setUserName(e.target.value)}
             />
             <input
               type="password"
