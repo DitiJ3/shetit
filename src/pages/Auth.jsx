@@ -1,34 +1,39 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const AuthForm = () => {
   const [isSignUpActive, setIsSignUpActive] = useState(false);
 
-  // State variables for inputs
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [userName, setUserName] = useState("");
   const [rePassword, setRePassword] = useState("");
 
+  const navigate = useNavigate(); // Initialize the navigate function
+
   const handleSignUp = () => {
     if (!userName || !email || !password || !rePassword) {
-      alert ("You must fill all fields for signup!");
+      toast.error("You must fill all fields for signup!", { position: "bottom-right" });
       return;
     }
     if (password !== rePassword) {
-      alert("Passwords do not match!");
+      toast.error("Passwords do not match!", { position: "bottom-right" });
       return;
+    } else {
+      toast.success("Sign Up Successful!", { position: "bottom-right" });
+      navigate("/feed"); 
     }
-    alert("Sign Up Successful!");
-    // Add additional logic for signup submission
   };
 
   const handleSignIn = () => {
     if (!email || !password) {
-      alert("You must fill all fields for login!");
+      toast.error("You must fill all fields for login!", { position: "bottom-right" });
       return;
+    } else {
+      toast.success("Log in Successful!", { position: "bottom-right" });
+      navigate("/feed");
     }
-    alert("Sign In Successful!");
-    // Add additional logic for login submission
   };
 
   return (
@@ -48,10 +53,12 @@ const AuthForm = () => {
         >
           <form
             className="flex flex-col items-center justify-center h-full px-12 bg-white text-center"
-            onSubmit={(e) => e.preventDefault()} // Prevent default form submission
+            onSubmit={(e) => e.preventDefault()}
           >
             <h1 className="font-bold text-2xl mb-4">Create Account</h1>
-            <span className="text-s text-gray-500 mb-4">Please fill all fields</span>
+            <span className="text-s text-gray-500 mb-4">
+              Please fill all fields
+            </span>
             <input
               type="text"
               placeholder="Username"
@@ -100,14 +107,14 @@ const AuthForm = () => {
         >
           <form
             className="flex flex-col items-center justify-center h-full px-12 bg-white text-center"
-            onSubmit={(e) => e.preventDefault()} // Prevent default form submission
+            onSubmit={(e) => e.preventDefault()}
           >
             <h1 className="font-bold text-2xl mb-4">Sign in</h1>
 
             <input
               type="email"
               placeholder="Email"
-              className="w-full bg-gray-200 rounded-md px-3 py-2 mb-2 outline-none"
+              className="w-full bg-gray-200 rounded-md px-3 py-2 mb-3 outline-none"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
             />
