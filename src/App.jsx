@@ -1,11 +1,11 @@
 import { useState } from 'react'
-import Login from './pages/login'
+import Auth from './pages/Auth'
 import { Routes, Route } from "react-router-dom"
 
 function App() {
 
   return <Routes>
-    <Route path="/login" element={<Login />} />
+    <Route path="/login" element={<Auth />} />
   </Routes>
 }
 
