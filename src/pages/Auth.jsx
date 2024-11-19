@@ -33,6 +33,7 @@ const AuthForm = () => {
     } else {
       toast.success("Log in Successful!", { position: "bottom-right" });
       navigate("/feed");
+      localStorage.setItem("userName", userName);
     }
   };
 

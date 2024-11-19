@@ -1,8 +1,12 @@
+import Header from "../components/header";
+
 const Feed = () => {
+
+    const userName = localStorage.getItem("userName");
     return (
-        <div>
-        <h1>Hello feed</h1>
-        </div>
+        <>
+            <Header/>
+        </>
     );
 }
 
