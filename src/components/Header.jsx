@@ -1,17 +1,22 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 const Header = () => {
   const navigate = useNavigate();
-  const [activePage, setActivePage] = useState("feed"); // Default active tab
+  const [activePage, setActivePage] = useState("feed"); 
   const userName = localStorage.getItem("userName");
 
   const handleNavigation = (page) => {
     if (activePage !== page) {
-      setActivePage(page); // Update active tab
-      navigate(`/${page}`); // Navigate to the selected page
+      setActivePage(page);
+      navigate(`/${page}`); 
     }
   };
+
+  useEffect(() => {
+    const path = window.location.pathname;
+    setActivePage(path.substring(1));
+  })
 
   return (
     <div id="nav" className="flex">
