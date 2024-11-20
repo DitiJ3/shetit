@@ -19,7 +19,7 @@ const Header = () => {
   })
 
   return (
-    <div id="nav" className="flex">
+    <div id="nav" className="flex fixed top-0 left-0 w-full z-10">
       <ul className="flex flex-wrap w-full h-16 content-center justify-around bg-gradient-to-r from-red-500 to-pink-500 text-white font-bold text-xl">
         <li
           className={`cursor-pointer ${

@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 const Blogs = () => {
   const blogPosts = [
     {
@@ -39,27 +41,23 @@ const Blogs = () => {
 
   return (
     <div>
-      <div className="mx-auto p-20 ">
+      <div className="mx-auto p-16 mt-12">
         <div className="grid grid-cols-3 gap-6">
           {blogPosts.map((post) => (
-            <div
-              className="p-6 shadow-xl rounded-3xl h-80 relative overflow-hidden"
-              key={post.id}
-              style={{
-                backgroundImage: `url(${post.image})`,
-                backgroundSize: "cover",
-                backgroundPosition: "center",
-              }}
-            >
-              {/* Gradient Overlay */}
-              <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent rounded-3xl"></div>
-
-              {/* Text Content at the Bottom */}
-              <div className="absolute bottom-0 w-full p-4 text-white bg-opacity-80">
-                <h2 className="font-bold text-lg">{post.title}</h2>
-                <p className="text-sm">{post.content}</p>
+            <Link to={`/post/${post.id}`} key={post.id}>
+              <div
+                className="p-6 border-solid border-2 rounded-3xl h-80 relative bg-cover bg-center text-white shadow-lg hover:p-4 transition-all duration-300"
+                style={{
+                  backgroundImage: `url(${post.image})`,
+                }}
+              >
+                <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent rounded-3xl"></div>
+                <div className="absolute bottom-0 w-full p-4">
+                  <h2 className="font-bold text-lg">{post.title}</h2>
+                  <p className="truncate">{post.content}</p>
+                </div>
               </div>
-            </div>
+            </Link>
           ))}
         </div>
       </div>
