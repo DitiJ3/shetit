@@ -5,6 +5,7 @@ import Feed from "./pages/Feed";
 import Checklist from "./pages/Checklist";
 import Profile from "./pages/Profile";
 import Expeditions from "./pages/Expeditions";
+import BlogPost from "./components/BlogPost";
 
 function App() {
   const [joinedExpeditions, setJoinedExpeditions] = useState([]);
@@ -31,6 +32,7 @@ function App() {
         path="/expeditions"
         element={<Expeditions setJoinedExpeditions={setJoinedExpeditions} />}
       />
+      <Route path="/post/:id" element={<BlogPost />} />
     </Routes>
   );
 }
