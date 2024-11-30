@@ -45,7 +45,7 @@ const Header = () => {
         >
           Checklist
         </li>
-        <div className="flex gap-10">
+        <div className="flex gap-4">
           <li
             className={`cursor-pointer ${
               activePage === "profile" ? "underline" : ""
@@ -55,10 +55,10 @@ const Header = () => {
             {userName}
           </li>
           <img
-            className="cursor-pointer"
+            className="cursor-pointer max-w-8"
             onClick={() => handleNavigation("profile")}
-            src=""
-            alt="profile pic"
+            src="src\assets\profile.svg"
+            alt="img"
           />
         </div>
       </ul>

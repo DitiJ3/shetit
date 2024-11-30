@@ -1,16 +1,38 @@
-import { useState } from 'react'
-import { Routes, Route } from "react-router-dom"
-import Auth from './pages/Auth'
-import Feed from './pages/Feed'
-import Checklist from './pages/Checklist'
+import { useState } from "react";
+import { Routes, Route } from "react-router-dom";
+import Auth from "./pages/Auth";
+import Feed from "./pages/Feed";
+import Checklist from "./pages/Checklist";
+import Profile from "./pages/Profile";
+import Expeditions from "./pages/Expeditions";
 
 function App() {
+  const [joinedExpeditions, setJoinedExpeditions] = useState([]);
 
-  return <Routes>
-    <Route path="/" element={<Auth />} />
-    <Route path="/feed" element={<Feed />} />
-    <Route path="/checklist" element={<Checklist />} />
-  </Routes>
+  const handleLeaveExpedition = (id) => {
+    setJoinedExpeditions((prev) => prev.filter((exp) => exp.id !== id));
+  };
+
+  return (
+    <Routes>
+      <Route path="/" element={<Auth />} />
+      <Route path="/feed" element={<Feed />} />
+      <Route path="/checklist" element={<Checklist />} />
+      <Route
+        path="/profile"
+        element={
+          <Profile
+            joinedExpeditions={joinedExpeditions}
+            onLeave={handleLeaveExpedition}
+          />
+        }
+      />
+      <Route
+        path="/expeditions"
+        element={<Expeditions setJoinedExpeditions={setJoinedExpeditions} />}
+      />
+    </Routes>
+  );
 }
 
-export default App
+export default App;
