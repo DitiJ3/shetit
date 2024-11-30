@@ -3,20 +3,27 @@ import { useNavigate } from "react-router-dom";
 
 const Header = () => {
   const navigate = useNavigate();
-  const [activePage, setActivePage] = useState("feed"); 
-  const userName = localStorage.getItem("userName");
+  const [activePage, setActivePage] = useState("feed");
+  const [userName, setUserName] = useState("");
+
+  useEffect(() => {
+    const userInfo = JSON.parse(localStorage.getItem("loggedInUser"));
+    if (userInfo && userInfo.userName) {
+      setUserName(userInfo.userName);
+    } else {
+      setUserName("Guest");
+    }
+
+    const path = window.location.pathname;
+    setActivePage(path.substring(1)); 
+  }, []);
 
   const handleNavigation = (page) => {
     if (activePage !== page) {
       setActivePage(page);
-      navigate(`/${page}`); 
+      navigate(`/${page}`);
     }
   };
-
-  useEffect(() => {
-    const path = window.location.pathname;
-    setActivePage(path.substring(1));
-  })
 
   return (
     <div id="nav" className="flex fixed top-0 left-0 w-full z-10">
@@ -45,7 +52,8 @@ const Header = () => {
         >
           Checklist
         </li>
-        <div className="flex gap-4">
+        
+        <div className="flex items-center gap-4">
           <li
             className={`cursor-pointer ${
               activePage === "profile" ? "underline" : ""
@@ -57,8 +65,8 @@ const Header = () => {
           <img
             className="cursor-pointer max-w-8"
             onClick={() => handleNavigation("profile")}
-            src="src\assets\profile.svg"
-            alt="img"
+            src="src/assets/profile.svg"
+            alt="Profile"
           />
         </div>
       </ul>

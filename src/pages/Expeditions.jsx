@@ -66,12 +66,12 @@ const Expeditions = ({ setJoinedExpeditions }) => {
     );
 
     if (alreadyJoined) {
-      toast.error('You cannot join two expeditions on the same date!');
+      toast.error('You cannot join two expeditions on the same date!', { position: "bottom-right" });
       return;
     }
 
     if (expedition.participants >= expedition.maxParticipants) {
-      toast.error('This expedition is full!');
+      toast.error('This expedition is full!', { position: "bottom-right" });
       return;
     }
 
@@ -91,7 +91,7 @@ const Expeditions = ({ setJoinedExpeditions }) => {
 
     setJoinedExpeditions && setJoinedExpeditions(updatedJoinedExpeditions);
 
-    toast.success('You have joined the expedition!');
+    toast.success('You have joined the expedition!', { position: "bottom-right" });
   };
 
   return (

@@ -14,27 +14,54 @@ const AuthForm = () => {
 
   const handleSignUp = () => {
     if (!userName || !email || !password || !rePassword) {
-      toast.error("You must fill all fields for signup!", { position: "bottom-right" });
+      toast.error("You must fill all fields for signup!", {
+        position: "bottom-right",
+      });
       return;
     }
     if (password !== rePassword) {
       toast.error("Passwords do not match!", { position: "bottom-right" });
       return;
-    } else {
-      toast.success("Sign Up Successful!", { position: "bottom-right" });
-      navigate("/feed"); 
     }
+
+    const users = JSON.parse(localStorage.getItem("users")) || [];
+    if (users.find((user) => user.userName === userName)) {
+      toast.error("Username already exists!", { position: "bottom-right" });
+      return;
+    }
+
+    // Save the new user in localStorage
+    const newUser = { userName, email, password };
+    localStorage.setItem("users", JSON.stringify([...users, newUser]));
+    localStorage.setItem("loggedInUser", JSON.stringify(newUser));
+
+    toast.success("Sign Up Successful!", { position: "bottom-right" });
+    navigate("/feed");
   };
 
   const handleSignIn = () => {
     if (!userName || !password) {
-      toast.error("You must fill all fields for login!", { position: "bottom-right" });
+      toast.error("You must fill all fields for login!", {
+        position: "bottom-right",
+      });
       return;
-    } else {
-      toast.success("Log in Successful!", { position: "bottom-right" });
-      navigate("/feed");
-      localStorage.setItem("userName", userName);
     }
+
+    const users = JSON.parse(localStorage.getItem("users")) || [];
+    const user = users.find(
+      (user) => user.userName === userName && user.password === password
+    );
+
+    if (!user) {
+      toast.error("Invalid username or password!", { position: "bottom-right" });
+      return;
+    }
+
+    // Save logged-in user data
+    localStorage.setItem("loggedInUser", JSON.stringify(user));
+
+    toast.success("Log in Successful!", { position: "bottom-right" });
+    navigate("/feed");
   };
 
   return (
@@ -44,7 +71,6 @@ const AuthForm = () => {
           isSignUpActive ? "right-panel-active" : ""
         }`}
       >
-        {/* Sign-Up Form */}
         <div
           className={`absolute top-0 left-0 h-full w-1/2 transition-all duration-500 ${
             isSignUpActive
@@ -98,7 +124,6 @@ const AuthForm = () => {
           </form>
         </div>
 
-        {/* Sign-In Form */}
         <div
           className={`absolute top-0 left-0 h-full w-1/2 transition-all duration-500 ${
             isSignUpActive
@@ -139,7 +164,6 @@ const AuthForm = () => {
           </form>
         </div>
 
-        {/* Overlay */}
         <div
           className={`absolute top-0 left-1/2 w-1/2 h-full overflow-hidden transition-transform duration-500 bg-gradient-to-r from-red-500 to-pink-500 text-white ${
             isSignUpActive ? "-translate-x-full" : ""
