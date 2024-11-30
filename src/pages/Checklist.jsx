@@ -47,12 +47,12 @@ const Checklist = () => {
           <input
             type="text"
             placeholder="Enter a new item..."
-            className="w-full px-3 py-2 border rounded focus:outline-none focus:ring-2 focus:ring-red-500"
+            className="w-full px-3 py-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
             value={newChecklistItem}
             onChange={(e) => setChecklistItem(e.target.value)}
           />
           <button
-            className="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600"
+            className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
             onClick={addChecklistItem}
           >
             Add
@@ -83,7 +83,7 @@ const Checklist = () => {
               </div>
               <button
                 onClick={() => removeChecklistItem(item.id)}
-                className="text-red-500 hover:text-red-600"
+                className="text-blue-500 hover:text-blue-600"
               >
                 Remove
               </button>
